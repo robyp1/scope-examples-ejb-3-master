@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.bluelotussoftware</groupId>
+        <artifactId>scope-examples-ejb-3-master</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.bluelotussoftware</groupId>
+    <artifactId>scope-examples-ejb-3-server</artifactId>
+    <packaging>ejb</packaging>
+    <name>scope-examples-ejb-3-server</name>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+			<finalName>${project.artifactId}</finalName>
+			<plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <version>${version.wildfly.maven.plugin}</version>
+                        <configuration>
+                            <filename>${project.build.finalName}.jar</filename>
+                        </configuration>
+                    </plugin>
+					 <plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-ejb-plugin</artifactId>
+						<version>${version.ejb.plugin}</version>
+						<configuration>
+							<ejbVersion>3.2</ejbVersion>
+							<!-- this is false by default -->
+							<generateClient>true</generateClient>
+						</configuration>
+					</plugin>
+                </plugins>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+      </build>
+
+</project>
